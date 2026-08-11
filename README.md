@@ -17,6 +17,7 @@ Each folder is a separate Go module (`go.mod`) with code examples for a specific
 ## Progress
 
 - [x] Basic syntax
+- [x] Arrays
 - [x] Slices (capacity, growth, conversions)
 - [x] Maps
 - [ ] Structs 
