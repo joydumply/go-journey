@@ -20,9 +20,9 @@ Each folder is a separate Go module (`go.mod`) with code examples for a specific
 - [x] Arrays
 - [x] Slices (capacity, growth, conversions)
 - [x] Maps
-- [ ] Structs 
-- [ ] Loops
-- [ ] Functions
+- [x] Structs 
+- [x] Loops
+- [x] Functions
 - [ ] Pointers
 - [ ] Methods vs Functions
 - [ ] Pointer Receivers
