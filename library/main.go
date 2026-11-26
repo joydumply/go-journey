@@ -23,4 +23,18 @@ func main() {
 		return
 	}
 	fmt.Println(string(data))
+
+	// Part 1 end
+
+	PrintStatus(&b)
+	if err := b.CheckOut(); err != nil {
+		fmt.Println("error: ", err)
+	}
+	PrintStatus(&b)
+
+	if err := b.CheckOut(); err != nil {
+		fmt.Println("error: ", err)
+	}
+	PrintStatus(&b)
+
 }
