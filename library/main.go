@@ -24,17 +24,31 @@ func main() {
 	}
 	fmt.Println(string(data))
 
-	// Part 1 end
+	// PrintStatus(&b)
+	// if err := b.CheckOut(); err != nil {
+	// 	fmt.Println("error: ", err)
+	// }
+	// PrintStatus(&b)
 
-	PrintStatus(&b)
-	if err := b.CheckOut(); err != nil {
-		fmt.Println("error: ", err)
-	}
-	PrintStatus(&b)
+	// if err := b.CheckOut(); err != nil {
+	// 	fmt.Println("error: ", err)
+	// }
+	// PrintStatus(&b)
 
-	if err := b.CheckOut(); err != nil {
-		fmt.Println("error: ", err)
+	m1 := Magazine{
+		Title:       "Nikita",
+		IssueNumber: 777,
+		Available:   true,
 	}
-	PrintStatus(&b)
+
+	// d1 := b.Describe()
+	// d2 := m1.Describe()
+	// fmt.Println(d1)
+	// fmt.Println(d2)
+
+	c := []Item{&b, &m1}
+	b.CheckOut()
+
+	PrintCatalog(c)
 
 }

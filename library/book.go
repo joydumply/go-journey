@@ -5,8 +5,18 @@ import (
 	"fmt"
 )
 
-// Part 1
+type Item interface {
+	Describe() string
+}
 
+type Borrowable interface {
+	CheckOut() error
+	Return()
+}
+type LibraryItem interface {
+	Item
+	Borrowable
+}
 type Author struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
@@ -22,9 +32,11 @@ type Book struct {
 	Notes     string `json:"notes,omitempty"`
 }
 
-// Part 1 end
-
-// Part 2
+type Magazine struct {
+	Title       string `json:"title"`
+	IssueNumber int    `json:"issueNumber"`
+	Available   bool   `json:"available"`
+}
 
 func (b *Book) CheckOut() error {
 	if !b.Available {
@@ -44,4 +56,41 @@ func PrintStatus(b *Book) {
 		return
 	}
 	fmt.Printf("%q is not available\n", b.Title)
+}
+
+func (b Book) Describe() string {
+	var available string
+	if b.Available {
+		available = "available"
+	} else {
+		available = "not available"
+	}
+	return fmt.Sprintf("Book: %q by %s %s (%d), %s", b.Title, b.FirstName, b.LastName, b.Year, available)
+}
+
+func (m Magazine) Describe() string {
+	var available string
+	if m.Available {
+		available = "available"
+	} else {
+		available = "not available"
+	}
+	return fmt.Sprintf("Magazine: %q #%d, %s", m.Title, m.IssueNumber, available)
+}
+
+func PrintCatalog(items []Item) {
+	for _, v := range items {
+		fmt.Println(v.Describe())
+	}
+}
+
+func Describe(x any) string {
+	switch x.(type) {
+	case Book, *Book:
+		return "it's a book"
+	case Magazine, *Magazine:
+		return "it's a magazine"
+	default:
+		return "unknown item"
+	}
 }
