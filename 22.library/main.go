@@ -24,16 +24,16 @@ func main() {
 	}
 	fmt.Println(string(data))
 
-	// PrintStatus(&b)
-	// if err := b.CheckOut(); err != nil {
-	// 	fmt.Println("error: ", err)
-	// }
-	// PrintStatus(&b)
+	PrintStatus(&b)
+	if err := b.CheckOut(); err != nil {
+		fmt.Println("error: ", err)
+	}
+	PrintStatus(&b)
 
-	// if err := b.CheckOut(); err != nil {
-	// 	fmt.Println("error: ", err)
-	// }
-	// PrintStatus(&b)
+	if err := b.CheckOut(); err != nil {
+		fmt.Println("error: ", err)
+	}
+	PrintStatus(&b)
 
 	m1 := Magazine{
 		Title:       "Nikita",
@@ -41,13 +41,11 @@ func main() {
 		Available:   true,
 	}
 
-	// d1 := b.Describe()
-	// d2 := m1.Describe()
-	// fmt.Println(d1)
-	// fmt.Println(d2)
-
+	b.Return()
 	c := []Item{&b, &m1}
-	b.CheckOut()
+	if err := b.CheckOut(); err != nil {
+		fmt.Println("error: ", err)
+	}
 
 	PrintCatalog(c)
 
@@ -56,8 +54,14 @@ func main() {
 	q.Enqueue("Vlad")
 	q.Enqueue("Vitos")
 
-	item, ok := q.Dequeue()
-	fmt.Println(item, ok, q.Len())
+	for {
+		name, ok := q.Dequeue()
+		if !ok {
+			break
+		}
+		fmt.Println(name)
+	}
+	fmt.Println("queue is empty, len:", q.Len())
 
 	books := []Book{
 		{
@@ -105,5 +109,21 @@ func main() {
 	for _, b := range available {
 		fmt.Println(b.Describe())
 	}
+
+	d := CountByDecade(books)
+	fmt.Println(d)
+
+	for _, b := range books {
+		y := AgeCategory(b.Year)
+		fmt.Printf("%q is %s\n", b.Title, y)
+	}
+
+	t, a := LibraryStats(books...)
+	fmt.Printf("total: %d, available: %d\n", t, a)
+
+	fmt.Println(Describe(b))
+	fmt.Println(Describe(&b))
+	fmt.Println(Describe(m1))
+	fmt.Println(Describe(42))
 
 }

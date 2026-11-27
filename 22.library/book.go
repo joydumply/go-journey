@@ -13,6 +13,11 @@ type Borrowable interface {
 	CheckOut() error
 	Return()
 }
+
+// LibraryItem = Item + Borrowable
+// Magazine не удовлетворяет LibraryItem т.к в нем не реализованы методы Checkout и Return
+// Book (значение) тоже не удовлетворяет,т.к. в Book методы сделаны с ссылочным значением
+// *Book удовлетворяет, потому что описанные методы реализованы с ссылкой, а не с копией 
 type LibraryItem interface {
 	Item
 	Borrowable
